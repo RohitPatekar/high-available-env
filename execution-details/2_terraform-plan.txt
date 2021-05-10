@@ -1,0 +1,1279 @@
+terraform plan
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_group.app_asg will be created
+  + resource "aws_autoscaling_group" "app_asg" {
+      + arn                       = (known after apply)
+      + availability_zones        = (known after apply)
+      + default_cooldown          = (known after apply)
+      + desired_capacity          = 2
+      + force_delete              = false
+      + force_delete_warm_pool    = false
+      + health_check_grace_period = 300
+      + health_check_type         = "EC2"
+      + id                        = (known after apply)
+      + launch_configuration      = "launch-config"
+      + max_size                  = 5
+      + metrics_granularity       = "1Minute"
+      + min_size                  = 2
+      + name                      = "app-asg"
+      + protect_from_scale_in     = false
+      + service_linked_role_arn   = (known after apply)
+      + target_group_arns         = (known after apply)
+      + vpc_zone_identifier       = (known after apply)
+      + wait_for_capacity_timeout = "10m"
+    }
+
+  # aws_autoscaling_policy.asg_policy will be created
+  + resource "aws_autoscaling_policy" "asg_policy" {
+      + arn                       = (known after apply)
+      + autoscaling_group_name    = "app-asg"
+      + estimated_instance_warmup = 200
+      + id                        = (known after apply)
+      + metric_aggregation_type   = (known after apply)
+      + name                      = "asg-policy"
+      + policy_type               = "TargetTrackingScaling"
+
+      + target_tracking_configuration {
+          + disable_scale_in = false
+          + target_value     = 60
+
+          + predefined_metric_specification {
+              + predefined_metric_type = "ASGAverageCPUUtilization"
+            }
+        }
+    }
+
+  # aws_db_instance.mysql_rds will be created
+  + resource "aws_db_instance" "mysql_rds" {
+      + address                               = (known after apply)
+      + allocated_storage                     = 10
+      + apply_immediately                     = true
+      + arn                                   = (known after apply)
+      + auto_minor_version_upgrade            = true
+      + availability_zone                     = (known after apply)
+      + backup_retention_period               = (known after apply)
+      + backup_window                         = (known after apply)
+      + ca_cert_identifier                    = (known after apply)
+      + character_set_name                    = (known after apply)
+      + copy_tags_to_snapshot                 = false
+      + db_subnet_group_name                  = "main"
+      + delete_automated_backups              = true
+      + endpoint                              = (known after apply)
+      + engine                                = "mysql"
+      + engine_version                        = "5.7"
+      + hosted_zone_id                        = (known after apply)
+      + id                                    = (known after apply)
+      + identifier                            = (known after apply)
+      + identifier_prefix                     = (known after apply)
+      + instance_class                        = "db.t2.micro"
+      + kms_key_id                            = (known after apply)
+      + latest_restorable_time                = (known after apply)
+      + license_model                         = (known after apply)
+      + maintenance_window                    = (known after apply)
+      + monitoring_interval                   = 0
+      + monitoring_role_arn                   = (known after apply)
+      + multi_az                              = (known after apply)
+      + name                                  = "Bookstore"
+      + option_group_name                     = (known after apply)
+      + parameter_group_name                  = "default.mysql5.7"
+      + password                              = (sensitive value)
+      + performance_insights_enabled          = false
+      + performance_insights_kms_key_id       = (known after apply)
+      + performance_insights_retention_period = (known after apply)
+      + port                                  = (known after apply)
+      + publicly_accessible                   = false
+      + replicas                              = (known after apply)
+      + resource_id                           = (known after apply)
+      + skip_final_snapshot                   = true
+      + snapshot_identifier                   = (known after apply)
+      + status                                = (known after apply)
+      + storage_type                          = (known after apply)
+      + tags                                  = {
+          + "Environment" = "dev"
+          + "Name"        = "mysql-rds"
+          + "Terraform"   = "true"
+        }
+      + tags_all                              = {
+          + "Environment" = "dev"
+          + "Name"        = "mysql-rds"
+          + "Terraform"   = "true"
+        }
+      + timezone                              = (known after apply)
+      + username                              = "admin"
+      + vpc_security_group_ids                = (known after apply)
+    }
+
+  # aws_db_subnet_group.private_subnet_group will be created
+  + resource "aws_db_subnet_group" "private_subnet_group" {
+      + arn         = (known after apply)
+      + description = "Managed by Terraform"
+      + id          = (known after apply)
+      + name        = "main"
+      + name_prefix = (known after apply)
+      + subnet_ids  = (known after apply)
+      + tags        = {
+          + "Environment" = "dev"
+          + "Name"        = "private-subnet-group"
+          + "Terraform"   = "true"
+        }
+      + tags_all    = {
+          + "Environment" = "dev"
+          + "Name"        = "private-subnet-group"
+          + "Terraform"   = "true"
+        }
+    }
+
+  # aws_instance.bastion-ec2-instance will be created
+  + resource "aws_instance" "bastion-ec2-instance" {
+      + ami                                  = "ami-0d5eff06f840b45e9"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = true
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "bastion-kp"
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Environment" = "dev"
+          + "Name"        = "ec2-bastion-host"
+          + "Terraform"   = "true"
+        }
+      + tags_all                             = {
+          + "Environment" = "dev"
+          + "Name"        = "ec2-bastion-host"
+          + "Terraform"   = "true"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = "8209a6ebe1378c093c267e5b0f9ea76853d00543"
+      + vpc_security_group_ids               = (known after apply)
+
+      + ebs_block_device {
+          + delete_on_termination = (known after apply)
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + snapshot_id           = (known after apply)
+          + tags                  = (known after apply)
+          + throughput            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_type           = (known after apply)
+        }
+
+      + enclave_options {
+          + enabled = (known after apply)
+        }
+
+      + ephemeral_block_device {
+          + device_name  = (known after apply)
+          + no_device    = (known after apply)
+          + virtual_name = (known after apply)
+        }
+
+      + metadata_options {
+          + http_endpoint               = (known after apply)
+          + http_put_response_hop_limit = (known after apply)
+          + http_tokens                 = (known after apply)
+        }
+
+      + network_interface {
+          + delete_on_termination = (known after apply)
+          + device_index          = (known after apply)
+          + network_interface_id  = (known after apply)
+        }
+
+      + root_block_device {
+          + delete_on_termination = (known after apply)
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + tags                  = (known after apply)
+          + throughput            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_type           = (known after apply)
+        }
+    }
+
+  # aws_key_pair.bastion_kp will be created
+  + resource "aws_key_pair" "bastion_kp" {
+      + arn         = (known after apply)
+      + fingerprint = (known after apply)
+      + id          = (known after apply)
+      + key_name    = "bastion-kp"
+      + key_pair_id = (known after apply)
+      + public_key  = "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAu/gf1EaMKq44XrnWSLQFj5Hmn+NMRfZonDLkePx94WUu9LBK1LX0Ze+qcfL79Ol1FsXsBPnyWmDNRSWCHkdhHZpLuo6D8/YWu6DKZHdkQNZ+vhS7zZtpWy/Pk1+BE2dTPlWYKIqJHW3o3oHUeKKr8NFhuTm8uqaylksApAZ0PsSyJmNofISZecYCI15Qzz+zLzDbitDOsdb+IJngeWM/twcBuzzm03e5u5qQtY3wYB1UHN4piyAFAN5+Lb7gMVmi75wYa28seLkW3CfulkynSE7FK/HaBGCHhhHDIBAiVaUTfPhLoWJUTZjpAxDKsvf0h7Noq8si3hrrjJbz20V4yQ== rsa-key-20210506"
+      + tags        = {
+          + "Environment" = "dev"
+          + "Name"        = "bastion-kp"
+          + "Terraform"   = "true"
+        }
+      + tags_all    = {
+          + "Environment" = "dev"
+          + "Name"        = "bastion-kp"
+          + "Terraform"   = "true"
+        }
+    }
+
+  # aws_key_pair.private_kp will be created
+  + resource "aws_key_pair" "private_kp" {
+      + arn         = (known after apply)
+      + fingerprint = (known after apply)
+      + id          = (known after apply)
+      + key_name    = "private-kp"
+      + key_pair_id = (known after apply)
+      + public_key  = "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEArpvRund4rryxbenREaftLLp+i5dXTsqJdfWkSzafNe7H2xwKPenzKgxwur3wkV4RzgrLfUmYgIqfMTzVPkLRvqcipTehLu+naqW4WLTWU+u4P3AfwxJi+2Weivgcfe5fvYAiAvDzf1TMTS7YQ9ml7VKqEPtW1EVLlWZTjpJ0eMPaVuWvMuXMVIWqMdWbtrWDxAa203VTxCtfBSmW/Y8MlJqqUVFxHXyrdel8wH8gUIuJOwd9rXZTYh8QXLKsazuCvaGkVieYh7Mqzr8nYJI2f9VxZn45Dg4X3cyNlcPVj8EkoSmgF8VLxzunm45s2z0xKAgj74nf8YAFP7pMU6tyTw== rsa-key-20210506"
+      + tags        = {
+          + "Environment" = "dev"
+          + "Name"        = "private-kp"
+          + "Terraform"   = "true"
+        }
+      + tags_all    = {
+          + "Environment" = "dev"
+          + "Name"        = "private-kp"
+          + "Terraform"   = "true"
+        }
+    }
+
+  # aws_launch_configuration.launch_config will be created
+  + resource "aws_launch_configuration" "launch_config" {
+      + arn                         = (known after apply)
+      + associate_public_ip_address = false
+      + ebs_optimized               = (known after apply)
+      + enable_monitoring           = true
+      + iam_instance_profile        = "AWSAdminRole"
+      + id                          = (known after apply)
+      + image_id                    = "ami-043261a3d9b13da22"
+      + instance_type               = "t2.micro"
+      + key_name                    = "private-kp"
+      + name                        = "launch-config"
+      + security_groups             = (known after apply)
+
+      + ebs_block_device {
+          + delete_on_termination = (known after apply)
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + no_device             = (known after apply)
+          + snapshot_id           = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_type           = (known after apply)
+        }
+
+      + metadata_options {
+          + http_endpoint               = (known after apply)
+          + http_put_response_hop_limit = (known after apply)
+          + http_tokens                 = (known after apply)
+        }
+
+      + root_block_device {
+          + delete_on_termination = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_type           = (known after apply)
+        }
+    }
+
+  # aws_lb.alb will be created
+  + resource "aws_lb" "alb" {
+      + arn                        = (known after apply)
+      + arn_suffix                 = (known after apply)
+      + dns_name                   = (known after apply)
+      + drop_invalid_header_fields = false
+      + enable_deletion_protection = false
+      + enable_http2               = true
+      + id                         = (known after apply)
+      + idle_timeout               = 60
+      + internal                   = (known after apply)
+      + ip_address_type            = (known after apply)
+      + load_balancer_type         = "application"
+      + name                       = "load-balancer"
+      + security_groups            = (known after apply)
+      + subnets                    = (known after apply)
+      + tags                       = {
+          + "Environment" = "dev"
+          + "Name"        = "load-balancer"
+          + "Terraform"   = "true"
+        }
+      + tags_all                   = {
+          + "Environment" = "dev"
+          + "Name"        = "load-balancer"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                     = (known after apply)
+      + zone_id                    = (known after apply)
+
+      + subnet_mapping {
+          + allocation_id        = (known after apply)
+          + ipv6_address         = (known after apply)
+          + outpost_id           = (known after apply)
+          + private_ipv4_address = (known after apply)
+          + subnet_id            = (known after apply)
+        }
+    }
+
+  # aws_lb_listener.lb_listener will be created
+  + resource "aws_lb_listener" "lb_listener" {
+      + arn               = (known after apply)
+      + id                = (known after apply)
+      + load_balancer_arn = (known after apply)
+      + port              = 80
+      + protocol          = "HTTP"
+      + ssl_policy        = (known after apply)
+
+      + default_action {
+          + order            = (known after apply)
+          + target_group_arn = (known after apply)
+          + type             = "forward"
+        }
+    }
+
+  # aws_lb_target_group.asg_tg will be created
+  + resource "aws_lb_target_group" "asg_tg" {
+      + arn                                = (known after apply)
+      + arn_suffix                         = (known after apply)
+      + deregistration_delay               = 300
+      + id                                 = (known after apply)
+      + lambda_multi_value_headers_enabled = false
+      + load_balancing_algorithm_type      = (known after apply)
+      + name                               = "asg-tg"
+      + port                               = 8080
+      + preserve_client_ip                 = (known after apply)
+      + protocol                           = "HTTP"
+      + protocol_version                   = (known after apply)
+      + proxy_protocol_v2                  = false
+      + slow_start                         = 0
+      + tags                               = {
+          + "Environment" = "dev"
+          + "Name"        = "asg-tg"
+          + "Terraform"   = "true"
+        }
+      + tags_all                           = {
+          + "Environment" = "dev"
+          + "Name"        = "asg-tg"
+          + "Terraform"   = "true"
+        }
+      + target_type                        = "instance"
+      + vpc_id                             = (known after apply)
+
+      + health_check {
+          + enabled             = true
+          + healthy_threshold   = 2
+          + interval            = 10
+          + matcher             = "200"
+          + path                = "/"
+          + port                = "traffic-port"
+          + protocol            = "HTTP"
+          + timeout             = 5
+          + unhealthy_threshold = 2
+        }
+
+      + stickiness {
+          + cookie_duration = (known after apply)
+          + enabled         = (known after apply)
+          + type            = (known after apply)
+        }
+    }
+
+  # aws_security_group.alb_sg will be created
+  + resource "aws_security_group" "alb_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security Group for ALB"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = ""
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Authorise only from everywhere to 443"
+              + from_port        = 443
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 443
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Authorise only from everywhere to 80"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+        ]
+      + name                   = "alb-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Environment" = "dev"
+          + "Name"        = "alb-sg"
+          + "Terraform"   = "true"
+        }
+      + tags_all               = {
+          + "Environment" = "dev"
+          + "Name"        = "alb-sg"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_security_group.bastion_sg will be created
+  + resource "aws_security_group" "bastion_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security Group for Bastion Host"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = ""
+              + from_port        = 0
+              + ipv6_cidr_blocks = [
+                  + "::/0",
+                ]
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "SSH from everywhere"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+            },
+        ]
+      + name                   = "bastion-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Environment" = "dev"
+          + "Name"        = "bastion-sg"
+          + "Terraform"   = "true"
+        }
+      + tags_all               = {
+          + "Environment" = "dev"
+          + "Name"        = "bastion-sg"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_security_group.ec2_sg will be created
+  + resource "aws_security_group" "ec2_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security Group for EC2"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = ""
+              + from_port        = 0
+              + ipv6_cidr_blocks = [
+                  + "::/0",
+                ]
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + description      = "Authorise only from ALB"
+              + from_port        = 8080
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 8080
+            },
+          + {
+              + cidr_blocks      = []
+              + description      = "SSH from Bastion Host"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 22
+            },
+        ]
+      + name                   = "ec2-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Environment" = "dev"
+          + "Name"        = "ec2-sg"
+          + "Terraform"   = "true"
+        }
+      + tags_all               = {
+          + "Environment" = "dev"
+          + "Name"        = "ec2-sg"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_security_group.rds_sg will be created
+  + resource "aws_security_group" "rds_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security Group for RDS"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = ""
+              + from_port        = 0
+              + ipv6_cidr_blocks = [
+                  + "::/0",
+                ]
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + description      = "Authorise only from Bastion Host"
+              + from_port        = 3306
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 3306
+            },
+          + {
+              + cidr_blocks      = []
+              + description      = "Authorise only from EC2"
+              + from_port        = 3306
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 3306
+            },
+        ]
+      + name                   = "rds-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Environment" = "dev"
+          + "Name"        = "rds-sg"
+          + "Terraform"   = "true"
+        }
+      + tags_all               = {
+          + "Environment" = "dev"
+          + "Name"        = "rds-sg"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_ssm_parameter.dbendpoint will be created
+  + resource "aws_ssm_parameter" "dbendpoint" {
+      + arn       = (known after apply)
+      + data_type = (known after apply)
+      + id        = (known after apply)
+      + key_id    = (known after apply)
+      + name      = "/database/endpoint"
+      + tags      = {
+          + "Environment" = "dev"
+          + "Name"        = "dbendpoint"
+          + "Terraform"   = "true"
+        }
+      + tags_all  = {
+          + "Environment" = "dev"
+          + "Name"        = "dbendpoint"
+          + "Terraform"   = "true"
+        }
+      + tier      = "Standard"
+      + type      = "String"
+      + value     = (sensitive value)
+      + version   = (known after apply)
+    }
+
+  # aws_ssm_parameter.dbname will be created
+  + resource "aws_ssm_parameter" "dbname" {
+      + arn       = (known after apply)
+      + data_type = (known after apply)
+      + id        = (known after apply)
+      + key_id    = (known after apply)
+      + name      = "/database/dbname"
+      + tags      = {
+          + "Environment" = "dev"
+          + "Name"        = "dbname"
+          + "Terraform"   = "true"
+        }
+      + tags_all  = {
+          + "Environment" = "dev"
+          + "Name"        = "dbname"
+          + "Terraform"   = "true"
+        }
+      + tier      = "Standard"
+      + type      = "String"
+      + value     = (sensitive value)
+      + version   = (known after apply)
+    }
+
+  # aws_ssm_parameter.dbpassword will be created
+  + resource "aws_ssm_parameter" "dbpassword" {
+      + arn       = (known after apply)
+      + data_type = (known after apply)
+      + id        = (known after apply)
+      + key_id    = (known after apply)
+      + name      = "/database/password"
+      + tags      = {
+          + "Environment" = "dev"
+          + "Name"        = "dbpassword"
+          + "Terraform"   = "true"
+        }
+      + tags_all  = {
+          + "Environment" = "dev"
+          + "Name"        = "dbpassword"
+          + "Terraform"   = "true"
+        }
+      + tier      = "Standard"
+      + type      = "String"
+      + value     = (sensitive value)
+      + version   = (known after apply)
+    }
+
+  # aws_ssm_parameter.dbusername will be created
+  + resource "aws_ssm_parameter" "dbusername" {
+      + arn       = (known after apply)
+      + data_type = (known after apply)
+      + id        = (known after apply)
+      + key_id    = (known after apply)
+      + name      = "/database/username"
+      + tags      = {
+          + "Environment" = "dev"
+          + "Name"        = "dbusername"
+          + "Terraform"   = "true"
+        }
+      + tags_all  = {
+          + "Environment" = "dev"
+          + "Name"        = "dbusername"
+          + "Terraform"   = "true"
+        }
+      + tier      = "Standard"
+      + type      = "String"
+      + value     = (sensitive value)
+      + version   = (known after apply)
+    }
+
+  # module.vpc.aws_eip.nat[0] will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = (known after apply)
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags                 = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc                  = true
+    }
+
+  # module.vpc.aws_eip.nat[1] will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = (known after apply)
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags                 = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc                  = true
+    }
+
+  # module.vpc.aws_eip.nat[2] will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = (known after apply)
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags                 = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc                  = true
+    }
+
+  # module.vpc.aws_internet_gateway.this[0] will be created
+  + resource "aws_internet_gateway" "this" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + tags     = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # module.vpc.aws_nat_gateway.this[0] will be created
+  + resource "aws_nat_gateway" "this" {
+      + allocation_id        = (known after apply)
+      + id                   = (known after apply)
+      + network_interface_id = (known after apply)
+      + private_ip           = (known after apply)
+      + public_ip            = (known after apply)
+      + subnet_id            = (known after apply)
+      + tags                 = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+    }
+
+  # module.vpc.aws_nat_gateway.this[1] will be created
+  + resource "aws_nat_gateway" "this" {
+      + allocation_id        = (known after apply)
+      + id                   = (known after apply)
+      + network_interface_id = (known after apply)
+      + private_ip           = (known after apply)
+      + public_ip            = (known after apply)
+      + subnet_id            = (known after apply)
+      + tags                 = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+    }
+
+  # module.vpc.aws_nat_gateway.this[2] will be created
+  + resource "aws_nat_gateway" "this" {
+      + allocation_id        = (known after apply)
+      + id                   = (known after apply)
+      + network_interface_id = (known after apply)
+      + private_ip           = (known after apply)
+      + public_ip            = (known after apply)
+      + subnet_id            = (known after apply)
+      + tags                 = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+    }
+
+  # module.vpc.aws_route.private_nat_gateway[0] will be created
+  + resource "aws_route" "private_nat_gateway" {
+      + destination_cidr_block = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + instance_id            = (known after apply)
+      + instance_owner_id      = (known after apply)
+      + nat_gateway_id         = (known after apply)
+      + network_interface_id   = (known after apply)
+      + origin                 = (known after apply)
+      + route_table_id         = (known after apply)
+      + state                  = (known after apply)
+
+      + timeouts {
+          + create = "5m"
+        }
+    }
+
+  # module.vpc.aws_route.private_nat_gateway[1] will be created
+  + resource "aws_route" "private_nat_gateway" {
+      + destination_cidr_block = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + instance_id            = (known after apply)
+      + instance_owner_id      = (known after apply)
+      + nat_gateway_id         = (known after apply)
+      + network_interface_id   = (known after apply)
+      + origin                 = (known after apply)
+      + route_table_id         = (known after apply)
+      + state                  = (known after apply)
+
+      + timeouts {
+          + create = "5m"
+        }
+    }
+
+  # module.vpc.aws_route.private_nat_gateway[2] will be created
+  + resource "aws_route" "private_nat_gateway" {
+      + destination_cidr_block = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + instance_id            = (known after apply)
+      + instance_owner_id      = (known after apply)
+      + nat_gateway_id         = (known after apply)
+      + network_interface_id   = (known after apply)
+      + origin                 = (known after apply)
+      + route_table_id         = (known after apply)
+      + state                  = (known after apply)
+
+      + timeouts {
+          + create = "5m"
+        }
+    }
+
+  # module.vpc.aws_route.public_internet_gateway[0] will be created
+  + resource "aws_route" "public_internet_gateway" {
+      + destination_cidr_block = "0.0.0.0/0"
+      + gateway_id             = (known after apply)
+      + id                     = (known after apply)
+      + instance_id            = (known after apply)
+      + instance_owner_id      = (known after apply)
+      + network_interface_id   = (known after apply)
+      + origin                 = (known after apply)
+      + route_table_id         = (known after apply)
+      + state                  = (known after apply)
+
+      + timeouts {
+          + create = "5m"
+        }
+    }
+
+  # module.vpc.aws_route_table.private[0] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all         = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table.private[1] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all         = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table.private[2] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all         = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table.public[0] will be created
+  + resource "aws_route_table" "public" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all         = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private[0] will be created
+  + resource "aws_route_table_association" "private" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private[1] will be created
+  + resource "aws_route_table_association" "private" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private[2] will be created
+  + resource "aws_route_table_association" "private" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public[0] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public[1] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public[2] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private[0] will be created
+  + resource "aws_subnet" "private" {
+      + arn                             = (known after apply)
+      + assign_ipv6_address_on_creation = false
+      + availability_zone               = "us-east-1a"
+      + availability_zone_id            = (known after apply)
+      + cidr_block                      = "10.0.1.0/24"
+      + id                              = (known after apply)
+      + ipv6_cidr_block_association_id  = (known after apply)
+      + map_public_ip_on_launch         = false
+      + owner_id                        = (known after apply)
+      + tags                            = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all                        = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                          = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private[1] will be created
+  + resource "aws_subnet" "private" {
+      + arn                             = (known after apply)
+      + assign_ipv6_address_on_creation = false
+      + availability_zone               = "us-east-1b"
+      + availability_zone_id            = (known after apply)
+      + cidr_block                      = "10.0.2.0/24"
+      + id                              = (known after apply)
+      + ipv6_cidr_block_association_id  = (known after apply)
+      + map_public_ip_on_launch         = false
+      + owner_id                        = (known after apply)
+      + tags                            = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all                        = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                          = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private[2] will be created
+  + resource "aws_subnet" "private" {
+      + arn                             = (known after apply)
+      + assign_ipv6_address_on_creation = false
+      + availability_zone               = "us-east-1c"
+      + availability_zone_id            = (known after apply)
+      + cidr_block                      = "10.0.3.0/24"
+      + id                              = (known after apply)
+      + ipv6_cidr_block_association_id  = (known after apply)
+      + map_public_ip_on_launch         = false
+      + owner_id                        = (known after apply)
+      + tags                            = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all                        = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                          = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public[0] will be created
+  + resource "aws_subnet" "public" {
+      + arn                             = (known after apply)
+      + assign_ipv6_address_on_creation = false
+      + availability_zone               = "us-east-1a"
+      + availability_zone_id            = (known after apply)
+      + cidr_block                      = "10.0.101.0/24"
+      + id                              = (known after apply)
+      + ipv6_cidr_block_association_id  = (known after apply)
+      + map_public_ip_on_launch         = true
+      + owner_id                        = (known after apply)
+      + tags                            = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all                        = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                          = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public[1] will be created
+  + resource "aws_subnet" "public" {
+      + arn                             = (known after apply)
+      + assign_ipv6_address_on_creation = false
+      + availability_zone               = "us-east-1b"
+      + availability_zone_id            = (known after apply)
+      + cidr_block                      = "10.0.102.0/24"
+      + id                              = (known after apply)
+      + ipv6_cidr_block_association_id  = (known after apply)
+      + map_public_ip_on_launch         = true
+      + owner_id                        = (known after apply)
+      + tags                            = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all                        = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                          = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public[2] will be created
+  + resource "aws_subnet" "public" {
+      + arn                             = (known after apply)
+      + assign_ipv6_address_on_creation = false
+      + availability_zone               = "us-east-1c"
+      + availability_zone_id            = (known after apply)
+      + cidr_block                      = "10.0.103.0/24"
+      + id                              = (known after apply)
+      + ipv6_cidr_block_association_id  = (known after apply)
+      + map_public_ip_on_launch         = true
+      + owner_id                        = (known after apply)
+      + tags                            = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all                        = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + vpc_id                          = (known after apply)
+    }
+
+  # module.vpc.aws_vpc.this[0] will be created
+  + resource "aws_vpc" "this" {
+      + arn                              = (known after apply)
+      + assign_generated_ipv6_cidr_block = false
+      + cidr_block                       = "10.0.0.0/16"
+      + default_network_acl_id           = (known after apply)
+      + default_route_table_id           = (known after apply)
+      + default_security_group_id        = (known after apply)
+      + dhcp_options_id                  = (known after apply)
+      + enable_classiclink               = (known after apply)
+      + enable_classiclink_dns_support   = (known after apply)
+      + enable_dns_hostnames             = false
+      + enable_dns_support               = true
+      + id                               = (known after apply)
+      + instance_tenancy                 = "default"
+      + ipv6_association_id              = (known after apply)
+      + ipv6_cidr_block                  = (known after apply)
+      + main_route_table_id              = (known after apply)
+      + owner_id                         = (known after apply)
+      + tags                             = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+      + tags_all                         = {
+          + "Environment" = "dev"
+          + "Name"        = "VPC"
+          + "Terraform"   = "true"
+        }
+    }
+
+Plan: 47 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + alb_dns = (known after apply)
+
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.

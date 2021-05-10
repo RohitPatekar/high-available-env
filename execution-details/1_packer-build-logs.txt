@@ -1,0 +1,525 @@
+packer build image.pkr.hcl
+amazon-ebs.golden-ami: output will be in this color.
+
+==> amazon-ebs.golden-ami: Prevalidating any provided VPC information
+==> amazon-ebs.golden-ami: Prevalidating AMI Name: golden-ami-20210509152433
+    amazon-ebs.golden-ami: Found Image ID: ami-0d5eff06f840b45e9
+==> amazon-ebs.golden-ami: Creating temporary keypair: packer_6097feb5-f581-cb97-a2fc-5ee09ad0759b
+==> amazon-ebs.golden-ami: Creating temporary security group for this instance: packer_6097fec8-f8ea-c236-0969-47c8bc8ab7c4
+==> amazon-ebs.golden-ami: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...
+==> amazon-ebs.golden-ami: Launching a source AWS instance...
+==> amazon-ebs.golden-ami: Adding tags to source instance
+    amazon-ebs.golden-ami: Adding tag: "Name": "Packer Builder"
+    amazon-ebs.golden-ami: Instance ID: i-0ee067701c5d222cc
+==> amazon-ebs.golden-ami: Waiting for instance (i-0ee067701c5d222cc) to become ready...
+==> amazon-ebs.golden-ami: Using ssh communicator to connect: 3.84.97.243
+==> amazon-ebs.golden-ami: Waiting for SSH to become available...
+==> amazon-ebs.golden-ami: Connected to SSH!
+==> amazon-ebs.golden-ami: Provisioning with shell script: ../scripts/setup_tomcat.sh
+    amazon-ebs.golden-ami: Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+    amazon-ebs.golden-ami: Resolving Dependencies
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package tomcat.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: tomcat-lib = 7.0.76-10.amzn2.0.2 for package: tomcat-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: java >= 1:1.6.0 for package: tomcat-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: apache-commons-pool for package: tomcat-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: apache-commons-logging for package: tomcat-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: apache-commons-dbcp for package: tomcat-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: apache-commons-daemon for package: tomcat-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: apache-commons-collections for package: tomcat-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package apache-commons-collections.noarch 0:3.2.1-22.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: jpackage-utils for package: apache-commons-collections-3.2.1-22.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package apache-commons-daemon.x86_64 0:1.0.13-7.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package apache-commons-dbcp.noarch 0:1.4-17.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: mvn(org.apache.geronimo.specs:geronimo-jta_1.1_spec) for package: apache-commons-dbcp-1.4-17.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package apache-commons-logging.noarch 0:1.1.2-7.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: mvn(logkit:logkit) for package: apache-commons-logging-1.1.2-7.amzn2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: mvn(log4j:log4j) for package: apache-commons-logging-1.1.2-7.amzn2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: mvn(avalon-framework:avalon-framework-api) for package: apache-commons-logging-1.1.2-7.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package apache-commons-pool.noarch 0:1.6-9.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package java-11-amazon-corretto.x86_64 1:11.0.11+9-1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: java-11-amazon-corretto-headless(x86-64) = 1:11.0.11+9-1.amzn2 for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: dejavu-sans-mono-fonts for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: dejavu-serif-fonts for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: dejavu-sans-fonts for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: giflib for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: alsa-lib for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libXtst for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libXrandr for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libXrender for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libXt for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libXinerama for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libXi for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libX11 for package: 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: ---> Package tomcat-lib.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: tomcat-servlet-3.0-api = 7.0.76-10.amzn2.0.2 for package: tomcat-lib-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: tomcat-jsp-2.2-api = 7.0.76-10.amzn2.0.2 for package: tomcat-lib-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: tomcat-el-2.2-api = 7.0.76-10.amzn2.0.2 for package: tomcat-lib-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: ecj >= 1:4.2.1 for package: tomcat-lib-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package alsa-lib.x86_64 0:1.1.4.1-2.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package avalon-framework.noarch 0:4.3-10.1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: xalan-j2 for package: avalon-framework-4.3-10.1.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package avalon-logkit.noarch 0:2.1-14.1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: jms for package: avalon-logkit-2.1-14.1.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package dejavu-sans-fonts.noarch 0:2.33-6.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: dejavu-fonts-common = 2.33-6.amzn2 for package: dejavu-sans-fonts-2.33-6.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package dejavu-sans-mono-fonts.noarch 0:2.33-6.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package dejavu-serif-fonts.noarch 0:2.33-6.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package ecj.x86_64 1:4.5.2-3.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package geronimo-jta.noarch 0:1.1.1-17.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package giflib.x86_64 0:4.1.6-9.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: libSM.so.6()(64bit) for package: giflib-4.1.6-9.amzn2.0.2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libICE.so.6()(64bit) for package: giflib-4.1.6-9.amzn2.0.2.x86_64
+    amazon-ebs.golden-ami: ---> Package java-11-amazon-corretto-headless.x86_64 1:11.0.11+9-1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: fontconfig for package: 1:java-11-amazon-corretto-headless-11.0.11+9-1.amzn2.x86_64
+    amazon-ebs.golden-ami: ---> Package javapackages-tools.noarch 0:3.4.1-11.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: python-javapackages = 3.4.1-11.amzn2 for package: javapackages-tools-3.4.1-11.amzn2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: libxslt for package: javapackages-tools-3.4.1-11.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package libX11.x86_64 0:1.6.7-3.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: libX11-common >= 1.6.7-3.amzn2 for package: libX11-1.6.7-3.amzn2.x86_64
+    amazon-ebs.golden-ami: --> Processing Dependency: libxcb.so.1()(64bit) for package: libX11-1.6.7-3.amzn2.x86_64
+    amazon-ebs.golden-ami: ---> Package libXi.x86_64 0:1.7.9-1.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: libXext.so.6()(64bit) for package: libXi-1.7.9-1.amzn2.0.2.x86_64
+    amazon-ebs.golden-ami: ---> Package libXinerama.x86_64 0:1.1.3-2.1.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package libXrandr.x86_64 0:1.5.1-2.amzn2.0.3 will be installed
+    amazon-ebs.golden-ami: ---> Package libXrender.x86_64 0:0.9.10-1.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package libXt.x86_64 0:1.1.5-3.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package libXtst.x86_64 0:1.2.3-1.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package log4j.noarch 0:1.2.17-16.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: mvn(javax.mail:mail) for package: log4j-1.2.17-16.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package tomcat-el-2.2-api.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package tomcat-jsp-2.2-api.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package tomcat-servlet-3.0-api.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package dejavu-fonts-common.noarch 0:2.33-6.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: fontpackages-filesystem for package: dejavu-fonts-common-2.33-6.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package fontconfig.x86_64 0:2.13.0-4.3.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package geronimo-jms.noarch 0:1.1.1-19.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package javamail.noarch 0:1.4.6-8.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package libICE.x86_64 0:1.0.9-9.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package libSM.x86_64 0:1.2.2-2.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package libX11-common.noarch 0:1.6.7-3.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package libXext.x86_64 0:1.3.3-3.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package libxcb.x86_64 0:1.12-1.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: libXau.so.6()(64bit) for package: libxcb-1.12-1.amzn2.0.2.x86_64
+    amazon-ebs.golden-ami: ---> Package libxslt.x86_64 0:1.1.28-6.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package python-javapackages.noarch 0:3.4.1-11.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: python-lxml for package: python-javapackages-3.4.1-11.amzn2.noarch
+    amazon-ebs.golden-ami: ---> Package xalan-j2.noarch 0:2.7.1-23.1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: xerces-j2 for package: xalan-j2-2.7.1-23.1.amzn2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: osgi(org.apache.xerces) for package: xalan-j2-2.7.1-23.1.amzn2.noarch
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package fontpackages-filesystem.noarch 0:1.44-8.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package libXau.x86_64 0:1.0.8-2.1.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package python-lxml.x86_64 0:3.2.1-4.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package xerces-j2.noarch 0:2.11.0-17.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: xml-commons-resolver >= 1.2 for package: xerces-j2-2.11.0-17.amzn2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: xml-commons-apis >= 1.4.01 for package: xerces-j2-2.11.0-17.amzn2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: osgi(org.apache.xml.resolver) for package: xerces-j2-2.11.0-17.amzn2.noarch
+    amazon-ebs.golden-ami: --> Processing Dependency: osgi(javax.xml) for package: xerces-j2-2.11.0-17.amzn2.noarch
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package xml-commons-apis.noarch 0:1.4.01-16.amzn2 will be installed
+    amazon-ebs.golden-ami: ---> Package xml-commons-resolver.noarch 0:1.2-15.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Finished Dependency Resolution
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Dependencies Resolved
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami:  Package                          Arch   Version               Repository  Size
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Installing:
+    amazon-ebs.golden-ami:  tomcat                           noarch 7.0.76-10.amzn2.0.2   amzn2-core  92 k
+    amazon-ebs.golden-ami: Installing for dependencies:
+    amazon-ebs.golden-ami:  alsa-lib                         x86_64 1.1.4.1-2.amzn2       amzn2-core 425 k
+    amazon-ebs.golden-ami:  apache-commons-collections       noarch 3.2.1-22.amzn2        amzn2-core 509 k
+    amazon-ebs.golden-ami:  apache-commons-daemon            x86_64 1.0.13-7.amzn2        amzn2-core  54 k
+    amazon-ebs.golden-ami:  apache-commons-dbcp              noarch 1.4-17.amzn2          amzn2-core 167 k
+    amazon-ebs.golden-ami:  apache-commons-logging           noarch 1.1.2-7.amzn2         amzn2-core  78 k
+    amazon-ebs.golden-ami:  apache-commons-pool              noarch 1.6-9.amzn2           amzn2-core 113 k
+    amazon-ebs.golden-ami:  avalon-framework                 noarch 4.3-10.1.amzn2        amzn2-core  87 k
+    amazon-ebs.golden-ami:  avalon-logkit                    noarch 2.1-14.1.amzn2        amzn2-core  87 k
+    amazon-ebs.golden-ami:  dejavu-fonts-common              noarch 2.33-6.amzn2          amzn2-core  64 k
+    amazon-ebs.golden-ami:  dejavu-sans-fonts                noarch 2.33-6.amzn2          amzn2-core 1.4 M
+    amazon-ebs.golden-ami:  dejavu-sans-mono-fonts           noarch 2.33-6.amzn2          amzn2-core 433 k
+    amazon-ebs.golden-ami:  dejavu-serif-fonts               noarch 2.33-6.amzn2          amzn2-core 777 k
+    amazon-ebs.golden-ami:  ecj                              x86_64 1:4.5.2-3.amzn2.0.2   amzn2-core 1.9 M
+    amazon-ebs.golden-ami:  fontconfig                       x86_64 2.13.0-4.3.amzn2      amzn2-core 253 k
+    amazon-ebs.golden-ami:  fontpackages-filesystem          noarch 1.44-8.amzn2          amzn2-core  10 k
+    amazon-ebs.golden-ami:  geronimo-jms                     noarch 1.1.1-19.amzn2        amzn2-core  31 k
+    amazon-ebs.golden-ami:  geronimo-jta                     noarch 1.1.1-17.amzn2        amzn2-core  21 k
+    amazon-ebs.golden-ami:  giflib                           x86_64 4.1.6-9.amzn2.0.2     amzn2-core  40 k
+    amazon-ebs.golden-ami:  java-11-amazon-corretto          x86_64 1:11.0.11+9-1.amzn2   amzn2-core 189 k
+    amazon-ebs.golden-ami:  java-11-amazon-corretto-headless x86_64 1:11.0.11+9-1.amzn2   amzn2-core 164 M
+    amazon-ebs.golden-ami:  javamail                         noarch 1.4.6-8.amzn2         amzn2-core 757 k
+    amazon-ebs.golden-ami:  javapackages-tools               noarch 3.4.1-11.amzn2        amzn2-core  73 k
+    amazon-ebs.golden-ami:  libICE                           x86_64 1.0.9-9.amzn2.0.2     amzn2-core  67 k
+    amazon-ebs.golden-ami:  libSM                            x86_64 1.2.2-2.amzn2.0.2     amzn2-core  39 k
+    amazon-ebs.golden-ami:  libX11                           x86_64 1.6.7-3.amzn2         amzn2-core 606 k
+    amazon-ebs.golden-ami:  libX11-common                    noarch 1.6.7-3.amzn2         amzn2-core 164 k
+    amazon-ebs.golden-ami:  libXau                           x86_64 1.0.8-2.1.amzn2.0.2   amzn2-core  29 k
+    amazon-ebs.golden-ami:  libXext                          x86_64 1.3.3-3.amzn2.0.2     amzn2-core  39 k
+    amazon-ebs.golden-ami:  libXi                            x86_64 1.7.9-1.amzn2.0.2     amzn2-core  41 k
+    amazon-ebs.golden-ami:  libXinerama                      x86_64 1.1.3-2.1.amzn2.0.2   amzn2-core  14 k
+    amazon-ebs.golden-ami:  libXrandr                        x86_64 1.5.1-2.amzn2.0.3     amzn2-core  27 k
+    amazon-ebs.golden-ami:  libXrender                       x86_64 0.9.10-1.amzn2.0.2    amzn2-core  26 k
+    amazon-ebs.golden-ami:  libXt                            x86_64 1.1.5-3.amzn2.0.2     amzn2-core 177 k
+    amazon-ebs.golden-ami:  libXtst                          x86_64 1.2.3-1.amzn2.0.2     amzn2-core  20 k
+    amazon-ebs.golden-ami:  libxcb                           x86_64 1.12-1.amzn2.0.2      amzn2-core 216 k
+    amazon-ebs.golden-ami:  libxslt                          x86_64 1.1.28-6.amzn2        amzn2-core 240 k
+    amazon-ebs.golden-ami:  log4j                            noarch 1.2.17-16.amzn2       amzn2-core 444 k
+    amazon-ebs.golden-ami:  python-javapackages              noarch 3.4.1-11.amzn2        amzn2-core  31 k
+    amazon-ebs.golden-ami:  python-lxml                      x86_64 3.2.1-4.amzn2.0.2     amzn2-core 1.0 M
+    amazon-ebs.golden-ami:  tomcat-el-2.2-api                noarch 7.0.76-10.amzn2.0.2   amzn2-core  82 k
+    amazon-ebs.golden-ami:  tomcat-jsp-2.2-api               noarch 7.0.76-10.amzn2.0.2   amzn2-core  95 k
+    amazon-ebs.golden-ami:  tomcat-lib                       noarch 7.0.76-10.amzn2.0.2   amzn2-core 3.9 M
+    amazon-ebs.golden-ami:  tomcat-servlet-3.0-api           noarch 7.0.76-10.amzn2.0.2   amzn2-core 213 k
+    amazon-ebs.golden-ami:  xalan-j2                         noarch 2.7.1-23.1.amzn2      amzn2-core 1.9 M
+    amazon-ebs.golden-ami:  xerces-j2                        noarch 2.11.0-17.amzn2       amzn2-core 1.1 M
+    amazon-ebs.golden-ami:  xml-commons-apis                 noarch 1.4.01-16.amzn2       amzn2-core 227 k
+    amazon-ebs.golden-ami:  xml-commons-resolver             noarch 1.2-15.amzn2          amzn2-core 108 k
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Transaction Summary
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Install  1 Package (+47 Dependent packages)
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Total download size: 182 M
+    amazon-ebs.golden-ami: Installed size: 339 M
+    amazon-ebs.golden-ami: Downloading packages:
+    amazon-ebs.golden-ami: --------------------------------------------------------------------------------
+    amazon-ebs.golden-ami: Total                                               33 MB/s | 182 MB  00:05
+    amazon-ebs.golden-ami: Running transaction check
+    amazon-ebs.golden-ami: Running transaction test
+    amazon-ebs.golden-ami: Transaction test succeeded
+    amazon-ebs.golden-ami: Running transaction
+    amazon-ebs.golden-ami:   Installing : libICE-1.0.9-9.amzn2.0.2.x86_64                             1/48
+    amazon-ebs.golden-ami:   Installing : libSM-1.2.2-2.amzn2.0.2.x86_64                              2/48
+    amazon-ebs.golden-ami:   Installing : fontpackages-filesystem-1.44-8.amzn2.noarch                 3/48
+    amazon-ebs.golden-ami:   Installing : dejavu-fonts-common-2.33-6.amzn2.noarch                     4/48
+    amazon-ebs.golden-ami:   Installing : dejavu-sans-fonts-2.33-6.amzn2.noarch                       5/48
+    amazon-ebs.golden-ami:   Installing : libxslt-1.1.28-6.amzn2.x86_64                               6/48
+    amazon-ebs.golden-ami:   Installing : python-lxml-3.2.1-4.amzn2.0.2.x86_64                        7/48
+    amazon-ebs.golden-ami:   Installing : python-javapackages-3.4.1-11.amzn2.noarch                   8/48
+    amazon-ebs.golden-ami:   Installing : javapackages-tools-3.4.1-11.amzn2.noarch                    9/48
+    amazon-ebs.golden-ami:   Installing : tomcat-servlet-3.0-api-7.0.76-10.amzn2.0.2.noarch          10/48
+    amazon-ebs.golden-ami:   Installing : tomcat-jsp-2.2-api-7.0.76-10.amzn2.0.2.noarch              11/48
+    amazon-ebs.golden-ami:   Installing : tomcat-el-2.2-api-7.0.76-10.amzn2.0.2.noarch               12/48
+    amazon-ebs.golden-ami:   Installing : fontconfig-2.13.0-4.3.amzn2.x86_64                         13/48
+    amazon-ebs.golden-ami:   Installing : 1:java-11-amazon-corretto-headless-11.0.11+9-1.amzn2.x86   14/48
+    amazon-ebs.golden-ami:   Installing : dejavu-serif-fonts-2.33-6.amzn2.noarch                     15/48
+    amazon-ebs.golden-ami:   Installing : dejavu-sans-mono-fonts-2.33-6.amzn2.noarch                 16/48
+    amazon-ebs.golden-ami:   Installing : alsa-lib-1.1.4.1-2.amzn2.x86_64                            17/48
+    amazon-ebs.golden-ami:   Installing : libXau-1.0.8-2.1.amzn2.0.2.x86_64                          18/48
+    amazon-ebs.golden-ami:   Installing : libxcb-1.12-1.amzn2.0.2.x86_64                             19/48
+    amazon-ebs.golden-ami:   Installing : libX11-common-1.6.7-3.amzn2.noarch                         20/48
+    amazon-ebs.golden-ami:   Installing : libX11-1.6.7-3.amzn2.x86_64                                21/48
+    amazon-ebs.golden-ami:   Installing : libXext-1.3.3-3.amzn2.0.2.x86_64                           22/48
+    amazon-ebs.golden-ami:   Installing : libXi-1.7.9-1.amzn2.0.2.x86_64                             23/48
+    amazon-ebs.golden-ami:   Installing : libXrender-0.9.10-1.amzn2.0.2.x86_64                       24/48
+    amazon-ebs.golden-ami:   Installing : libXrandr-1.5.1-2.amzn2.0.3.x86_64                         25/48
+    amazon-ebs.golden-ami:   Installing : libXtst-1.2.3-1.amzn2.0.2.x86_64                           26/48
+    amazon-ebs.golden-ami:   Installing : libXinerama-1.1.3-2.1.amzn2.0.2.x86_64                     27/48
+    amazon-ebs.golden-ami:   Installing : libXt-1.1.5-3.amzn2.0.2.x86_64                             28/48
+    amazon-ebs.golden-ami:   Installing : giflib-4.1.6-9.amzn2.0.2.x86_64                            29/48
+    amazon-ebs.golden-ami:   Installing : 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64         30/48
+    amazon-ebs.golden-ami:   Installing : apache-commons-pool-1.6-9.amzn2.noarch                     31/48
+    amazon-ebs.golden-ami:   Installing : geronimo-jms-1.1.1-19.amzn2.noarch                         32/48
+    amazon-ebs.golden-ami:   Installing : xml-commons-apis-1.4.01-16.amzn2.noarch                    33/48
+    amazon-ebs.golden-ami:   Installing : apache-commons-collections-3.2.1-22.amzn2.noarch           34/48
+    amazon-ebs.golden-ami:   Installing : xml-commons-resolver-1.2-15.amzn2.noarch                   35/48
+    amazon-ebs.golden-ami:   Installing : xalan-j2-2.7.1-23.1.amzn2.noarch                           36/48
+    amazon-ebs.golden-ami:   Installing : xerces-j2-2.11.0-17.amzn2.noarch                           37/48
+    amazon-ebs.golden-ami:   Installing : javamail-1.4.6-8.amzn2.noarch                              38/48
+    amazon-ebs.golden-ami:   Installing : log4j-1.2.17-16.amzn2.noarch                               39/48
+    amazon-ebs.golden-ami:   Installing : apache-commons-logging-1.1.2-7.amzn2.noarch                40/48
+    amazon-ebs.golden-ami:   Installing : avalon-framework-4.3-10.1.amzn2.noarch                     41/48
+    amazon-ebs.golden-ami:   Installing : avalon-logkit-2.1-14.1.amzn2.noarch                        42/48
+    amazon-ebs.golden-ami:   Installing : 1:ecj-4.5.2-3.amzn2.0.2.x86_64                             43/48
+    amazon-ebs.golden-ami:   Installing : geronimo-jta-1.1.1-17.amzn2.noarch                         44/48
+    amazon-ebs.golden-ami:   Installing : apache-commons-dbcp-1.4-17.amzn2.noarch                    45/48
+    amazon-ebs.golden-ami:   Installing : tomcat-lib-7.0.76-10.amzn2.0.2.noarch                      46/48
+    amazon-ebs.golden-ami:   Installing : apache-commons-daemon-1.0.13-7.amzn2.x86_64                47/48
+    amazon-ebs.golden-ami:   Installing : tomcat-7.0.76-10.amzn2.0.2.noarch                          48/48
+    amazon-ebs.golden-ami:   Verifying  : tomcat-servlet-3.0-api-7.0.76-10.amzn2.0.2.noarch           1/48
+    amazon-ebs.golden-ami:   Verifying  : libXi-1.7.9-1.amzn2.0.2.x86_64                              2/48
+    amazon-ebs.golden-ami:   Verifying  : dejavu-serif-fonts-2.33-6.amzn2.noarch                      3/48
+    amazon-ebs.golden-ami:   Verifying  : geronimo-jms-1.1.1-19.amzn2.noarch                          4/48
+    amazon-ebs.golden-ami:   Verifying  : tomcat-lib-7.0.76-10.amzn2.0.2.noarch                       5/48
+    amazon-ebs.golden-ami:   Verifying  : javamail-1.4.6-8.amzn2.noarch                               6/48
+    amazon-ebs.golden-ami:   Verifying  : xml-commons-apis-1.4.01-16.amzn2.noarch                     7/48
+    amazon-ebs.golden-ami:   Verifying  : dejavu-fonts-common-2.33-6.amzn2.noarch                     8/48
+    amazon-ebs.golden-ami:   Verifying  : libxcb-1.12-1.amzn2.0.2.x86_64                              9/48
+    amazon-ebs.golden-ami:   Verifying  : libX11-1.6.7-3.amzn2.x86_64                                10/48
+    amazon-ebs.golden-ami:   Verifying  : libXrandr-1.5.1-2.amzn2.0.3.x86_64                         11/48
+    amazon-ebs.golden-ami:   Verifying  : libXext-1.3.3-3.amzn2.0.2.x86_64                           12/48
+    amazon-ebs.golden-ami:   Verifying  : libX11-common-1.6.7-3.amzn2.noarch                         13/48
+    amazon-ebs.golden-ami:   Verifying  : apache-commons-logging-1.1.2-7.amzn2.noarch                14/48
+    amazon-ebs.golden-ami:   Verifying  : dejavu-sans-mono-fonts-2.33-6.amzn2.noarch                 15/48
+    amazon-ebs.golden-ami:   Verifying  : python-lxml-3.2.1-4.amzn2.0.2.x86_64                       16/48
+    amazon-ebs.golden-ami:   Verifying  : libXt-1.1.5-3.amzn2.0.2.x86_64                             17/48
+    amazon-ebs.golden-ami:   Verifying  : 1:ecj-4.5.2-3.amzn2.0.2.x86_64                             18/48
+    amazon-ebs.golden-ami:   Verifying  : tomcat-jsp-2.2-api-7.0.76-10.amzn2.0.2.noarch              19/48
+    amazon-ebs.golden-ami:   Verifying  : geronimo-jta-1.1.1-17.amzn2.noarch                         20/48
+    amazon-ebs.golden-ami:   Verifying  : xerces-j2-2.11.0-17.amzn2.noarch                           21/48
+    amazon-ebs.golden-ami:   Verifying  : log4j-1.2.17-16.amzn2.noarch                               22/48
+    amazon-ebs.golden-ami:   Verifying  : avalon-framework-4.3-10.1.amzn2.noarch                     23/48
+    amazon-ebs.golden-ami:   Verifying  : libSM-1.2.2-2.amzn2.0.2.x86_64                             24/48
+    amazon-ebs.golden-ami:   Verifying  : libXrender-0.9.10-1.amzn2.0.2.x86_64                       25/48
+    amazon-ebs.golden-ami:   Verifying  : apache-commons-collections-3.2.1-22.amzn2.noarch           26/48
+    amazon-ebs.golden-ami:   Verifying  : xml-commons-resolver-1.2-15.amzn2.noarch                   27/48
+    amazon-ebs.golden-ami:   Verifying  : dejavu-sans-fonts-2.33-6.amzn2.noarch                      28/48
+    amazon-ebs.golden-ami:   Verifying  : fontconfig-2.13.0-4.3.amzn2.x86_64                         29/48
+    amazon-ebs.golden-ami:   Verifying  : apache-commons-pool-1.6-9.amzn2.noarch                     30/48
+    amazon-ebs.golden-ami:   Verifying  : apache-commons-dbcp-1.4-17.amzn2.noarch                    31/48
+    amazon-ebs.golden-ami:   Verifying  : apache-commons-daemon-1.0.13-7.amzn2.x86_64                32/48
+    amazon-ebs.golden-ami:   Verifying  : giflib-4.1.6-9.amzn2.0.2.x86_64                            33/48
+    amazon-ebs.golden-ami:   Verifying  : libXinerama-1.1.3-2.1.amzn2.0.2.x86_64                     34/48
+    amazon-ebs.golden-ami:   Verifying  : tomcat-el-2.2-api-7.0.76-10.amzn2.0.2.noarch               35/48
+    amazon-ebs.golden-ami:   Verifying  : avalon-logkit-2.1-14.1.amzn2.noarch                        36/48
+    amazon-ebs.golden-ami:   Verifying  : libXau-1.0.8-2.1.amzn2.0.2.x86_64                          37/48
+    amazon-ebs.golden-ami:   Verifying  : libxslt-1.1.28-6.amzn2.x86_64                              38/48
+    amazon-ebs.golden-ami:   Verifying  : python-javapackages-3.4.1-11.amzn2.noarch                  39/48
+    amazon-ebs.golden-ami:   Verifying  : libXtst-1.2.3-1.amzn2.0.2.x86_64                           40/48
+    amazon-ebs.golden-ami:   Verifying  : 1:java-11-amazon-corretto-headless-11.0.11+9-1.amzn2.x86   41/48
+    amazon-ebs.golden-ami:   Verifying  : 1:java-11-amazon-corretto-11.0.11+9-1.amzn2.x86_64         42/48
+    amazon-ebs.golden-ami:   Verifying  : alsa-lib-1.1.4.1-2.amzn2.x86_64                            43/48
+    amazon-ebs.golden-ami:   Verifying  : fontpackages-filesystem-1.44-8.amzn2.noarch                44/48
+    amazon-ebs.golden-ami:   Verifying  : libICE-1.0.9-9.amzn2.0.2.x86_64                            45/48
+    amazon-ebs.golden-ami:   Verifying  : xalan-j2-2.7.1-23.1.amzn2.noarch                           46/48
+    amazon-ebs.golden-ami:   Verifying  : tomcat-7.0.76-10.amzn2.0.2.noarch                          47/48
+    amazon-ebs.golden-ami:   Verifying  : javapackages-tools-3.4.1-11.amzn2.noarch                   48/48
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Installed:
+    amazon-ebs.golden-ami:   tomcat.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Dependency Installed:
+    amazon-ebs.golden-ami:   alsa-lib.x86_64 0:1.1.4.1-2.amzn2
+    amazon-ebs.golden-ami:   apache-commons-collections.noarch 0:3.2.1-22.amzn2
+    amazon-ebs.golden-ami:   apache-commons-daemon.x86_64 0:1.0.13-7.amzn2
+    amazon-ebs.golden-ami:   apache-commons-dbcp.noarch 0:1.4-17.amzn2
+    amazon-ebs.golden-ami:   apache-commons-logging.noarch 0:1.1.2-7.amzn2
+    amazon-ebs.golden-ami:   apache-commons-pool.noarch 0:1.6-9.amzn2
+    amazon-ebs.golden-ami:   avalon-framework.noarch 0:4.3-10.1.amzn2
+    amazon-ebs.golden-ami:   avalon-logkit.noarch 0:2.1-14.1.amzn2
+    amazon-ebs.golden-ami:   dejavu-fonts-common.noarch 0:2.33-6.amzn2
+    amazon-ebs.golden-ami:   dejavu-sans-fonts.noarch 0:2.33-6.amzn2
+    amazon-ebs.golden-ami:   dejavu-sans-mono-fonts.noarch 0:2.33-6.amzn2
+    amazon-ebs.golden-ami:   dejavu-serif-fonts.noarch 0:2.33-6.amzn2
+    amazon-ebs.golden-ami:   ecj.x86_64 1:4.5.2-3.amzn2.0.2
+    amazon-ebs.golden-ami:   fontconfig.x86_64 0:2.13.0-4.3.amzn2
+    amazon-ebs.golden-ami:   fontpackages-filesystem.noarch 0:1.44-8.amzn2
+    amazon-ebs.golden-ami:   geronimo-jms.noarch 0:1.1.1-19.amzn2
+    amazon-ebs.golden-ami:   geronimo-jta.noarch 0:1.1.1-17.amzn2
+    amazon-ebs.golden-ami:   giflib.x86_64 0:4.1.6-9.amzn2.0.2
+    amazon-ebs.golden-ami:   java-11-amazon-corretto.x86_64 1:11.0.11+9-1.amzn2
+    amazon-ebs.golden-ami:   java-11-amazon-corretto-headless.x86_64 1:11.0.11+9-1.amzn2
+    amazon-ebs.golden-ami:   javamail.noarch 0:1.4.6-8.amzn2
+    amazon-ebs.golden-ami:   javapackages-tools.noarch 0:3.4.1-11.amzn2
+    amazon-ebs.golden-ami:   libICE.x86_64 0:1.0.9-9.amzn2.0.2
+    amazon-ebs.golden-ami:   libSM.x86_64 0:1.2.2-2.amzn2.0.2
+    amazon-ebs.golden-ami:   libX11.x86_64 0:1.6.7-3.amzn2
+    amazon-ebs.golden-ami:   libX11-common.noarch 0:1.6.7-3.amzn2
+    amazon-ebs.golden-ami:   libXau.x86_64 0:1.0.8-2.1.amzn2.0.2
+    amazon-ebs.golden-ami:   libXext.x86_64 0:1.3.3-3.amzn2.0.2
+    amazon-ebs.golden-ami:   libXi.x86_64 0:1.7.9-1.amzn2.0.2
+    amazon-ebs.golden-ami:   libXinerama.x86_64 0:1.1.3-2.1.amzn2.0.2
+    amazon-ebs.golden-ami:   libXrandr.x86_64 0:1.5.1-2.amzn2.0.3
+    amazon-ebs.golden-ami:   libXrender.x86_64 0:0.9.10-1.amzn2.0.2
+    amazon-ebs.golden-ami:   libXt.x86_64 0:1.1.5-3.amzn2.0.2
+    amazon-ebs.golden-ami:   libXtst.x86_64 0:1.2.3-1.amzn2.0.2
+    amazon-ebs.golden-ami:   libxcb.x86_64 0:1.12-1.amzn2.0.2
+    amazon-ebs.golden-ami:   libxslt.x86_64 0:1.1.28-6.amzn2
+    amazon-ebs.golden-ami:   log4j.noarch 0:1.2.17-16.amzn2
+    amazon-ebs.golden-ami:   python-javapackages.noarch 0:3.4.1-11.amzn2
+    amazon-ebs.golden-ami:   python-lxml.x86_64 0:3.2.1-4.amzn2.0.2
+    amazon-ebs.golden-ami:   tomcat-el-2.2-api.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:   tomcat-jsp-2.2-api.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:   tomcat-lib.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:   tomcat-servlet-3.0-api.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:   xalan-j2.noarch 0:2.7.1-23.1.amzn2
+    amazon-ebs.golden-ami:   xerces-j2.noarch 0:2.11.0-17.amzn2
+    amazon-ebs.golden-ami:   xml-commons-apis.noarch 0:1.4.01-16.amzn2
+    amazon-ebs.golden-ami:   xml-commons-resolver.noarch 0:1.2-15.amzn2
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Complete!
+==> amazon-ebs.golden-ami: Existing lock /var/run/yum.pid: another copy is running as pid 3221.
+    amazon-ebs.golden-ami: Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+==> amazon-ebs.golden-ami: Another app is currently holding the yum lock; waiting for it to exit...
+==> amazon-ebs.golden-ami:   The other application is: yum
+==> amazon-ebs.golden-ami:     Memory :  49 M RSS (265 MB VSZ)
+==> amazon-ebs.golden-ami:     Started: Sun May  9 15:26:12 2021 - 00:41 ago
+==> amazon-ebs.golden-ami:     State  : Running, pid: 3221
+==> amazon-ebs.golden-ami: Existing lock /var/run/yum.pid: another copy is running as pid 3418.
+==> amazon-ebs.golden-ami: Another app is currently holding the yum lock; waiting for it to exit...
+==> amazon-ebs.golden-ami:   The other application is: yum
+==> amazon-ebs.golden-ami:     Memory :  64 M RSS (281 MB VSZ)
+==> amazon-ebs.golden-ami:     Started: Sun May  9 15:26:51 2021 - 00:04 ago
+==> amazon-ebs.golden-ami:     State  : Running, pid: 3418
+==> amazon-ebs.golden-ami: Another app is currently holding the yum lock; waiting for it to exit...
+==> amazon-ebs.golden-ami:   The other application is: yum
+==> amazon-ebs.golden-ami:     Memory : 142 M RSS (359 MB VSZ)
+==> amazon-ebs.golden-ami:     Started: Sun May  9 15:26:51 2021 - 00:06 ago
+==> amazon-ebs.golden-ami:     State  : Running, pid: 3418
+    amazon-ebs.golden-ami: Resolving Dependencies
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package tomcat-admin-webapps.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package tomcat-docs-webapp.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package tomcat-javadoc.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: ---> Package tomcat-webapps.noarch 0:7.0.76-10.amzn2.0.2 will be installed
+    amazon-ebs.golden-ami: --> Processing Dependency: jakarta-taglibs-standard >= 1.1 for package: tomcat-webapps-7.0.76-10.amzn2.0.2.noarch
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package jakarta-taglibs-standard.noarch 0:1.1.2-14.1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Finished Dependency Resolution
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Dependencies Resolved
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami:  Package                    Arch     Version                 Repository    Size
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Installing:
+    amazon-ebs.golden-ami:  tomcat-admin-webapps       noarch   7.0.76-10.amzn2.0.2     amzn2-core    40 k
+    amazon-ebs.golden-ami:  tomcat-docs-webapp         noarch   7.0.76-10.amzn2.0.2     amzn2-core   721 k
+    amazon-ebs.golden-ami:  tomcat-javadoc             noarch   7.0.76-10.amzn2.0.2     amzn2-core   2.6 M
+    amazon-ebs.golden-ami:  tomcat-webapps             noarch   7.0.76-10.amzn2.0.2     amzn2-core   341 k
+    amazon-ebs.golden-ami: Installing for dependencies:
+    amazon-ebs.golden-ami:  jakarta-taglibs-standard   noarch   1.1.2-14.1.amzn2        amzn2-core   303 k
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Transaction Summary
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Install  4 Packages (+1 Dependent package)
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Total download size: 3.9 M
+    amazon-ebs.golden-ami: Installed size: 49 M
+    amazon-ebs.golden-ami: Downloading packages:
+    amazon-ebs.golden-ami: --------------------------------------------------------------------------------
+    amazon-ebs.golden-ami: Total                                               10 MB/s | 3.9 MB  00:00
+    amazon-ebs.golden-ami: Running transaction check
+    amazon-ebs.golden-ami: Running transaction test
+    amazon-ebs.golden-ami: Transaction test succeeded
+    amazon-ebs.golden-ami: Running transaction
+    amazon-ebs.golden-ami:   Installing : jakarta-taglibs-standard-1.1.2-14.1.amzn2.noarch             1/5
+    amazon-ebs.golden-ami:   Installing : tomcat-webapps-7.0.76-10.amzn2.0.2.noarch                    2/5
+    amazon-ebs.golden-ami:   Installing : tomcat-admin-webapps-7.0.76-10.amzn2.0.2.noarch              3/5
+    amazon-ebs.golden-ami:   Installing : tomcat-javadoc-7.0.76-10.amzn2.0.2.noarch                    4/5
+    amazon-ebs.golden-ami:   Installing : tomcat-docs-webapp-7.0.76-10.amzn2.0.2.noarch                5/5
+    amazon-ebs.golden-ami:   Verifying  : tomcat-docs-webapp-7.0.76-10.amzn2.0.2.noarch                1/5
+    amazon-ebs.golden-ami:   Verifying  : jakarta-taglibs-standard-1.1.2-14.1.amzn2.noarch             2/5
+    amazon-ebs.golden-ami:   Verifying  : tomcat-javadoc-7.0.76-10.amzn2.0.2.noarch                    3/5
+    amazon-ebs.golden-ami:   Verifying  : tomcat-webapps-7.0.76-10.amzn2.0.2.noarch                    4/5
+    amazon-ebs.golden-ami:   Verifying  : tomcat-admin-webapps-7.0.76-10.amzn2.0.2.noarch              5/5
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Installed:
+    amazon-ebs.golden-ami:   tomcat-admin-webapps.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:   tomcat-docs-webapp.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:   tomcat-javadoc.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:   tomcat-webapps.noarch 0:7.0.76-10.amzn2.0.2
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Dependency Installed:
+    amazon-ebs.golden-ami:   jakarta-taglibs-standard.noarch 0:1.1.2-14.1.amzn2
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Complete!
+    amazon-ebs.golden-ami: Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+    amazon-ebs.golden-ami: Resolving Dependencies
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package amazon-cloudwatch-agent.x86_64 0:1.247347.4-1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Finished Dependency Resolution
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Dependencies Resolved
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami:  Package                    Arch      Version               Repository     Size
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Installing:
+    amazon-ebs.golden-ami:  amazon-cloudwatch-agent    x86_64    1.247347.4-1.amzn2    amzn2-core     41 M
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Transaction Summary
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Install  1 Package
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Total download size: 41 M
+    amazon-ebs.golden-ami: Installed size: 183 M
+    amazon-ebs.golden-ami: Downloading packages:
+    amazon-ebs.golden-ami: Running transaction check
+    amazon-ebs.golden-ami: Running transaction test
+    amazon-ebs.golden-ami: Transaction test succeeded
+    amazon-ebs.golden-ami: Running transaction
+    amazon-ebs.golden-ami: create group cwagent, result: 0
+    amazon-ebs.golden-ami: create user cwagent, result: 0
+    amazon-ebs.golden-ami:   Installing : amazon-cloudwatch-agent-1.247347.4-1.amzn2.x86_64            1/1
+    amazon-ebs.golden-ami:   Verifying  : amazon-cloudwatch-agent-1.247347.4-1.amzn2.x86_64            1/1
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Installed:
+    amazon-ebs.golden-ami:   amazon-cloudwatch-agent.x86_64 0:1.247347.4-1.amzn2
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Complete!
+    amazon-ebs.golden-ami: Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+    amazon-ebs.golden-ami: Resolving Dependencies
+    amazon-ebs.golden-ami: --> Running transaction check
+    amazon-ebs.golden-ami: ---> Package mariadb.x86_64 1:5.5.68-1.amzn2 will be installed
+    amazon-ebs.golden-ami: --> Finished Dependency Resolution
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Dependencies Resolved
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami:  Package        Arch          Version                   Repository         Size
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Installing:
+    amazon-ebs.golden-ami:  mariadb        x86_64        1:5.5.68-1.amzn2          amzn2-core        8.8 M
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Transaction Summary
+    amazon-ebs.golden-ami: ================================================================================
+    amazon-ebs.golden-ami: Install  1 Package
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Total download size: 8.8 M
+    amazon-ebs.golden-ami: Installed size: 49 M
+    amazon-ebs.golden-ami: Downloading packages:
+    amazon-ebs.golden-ami: Running transaction check
+    amazon-ebs.golden-ami: Running transaction test
+    amazon-ebs.golden-ami: Transaction test succeeded
+    amazon-ebs.golden-ami: Running transaction
+    amazon-ebs.golden-ami:   Installing : 1:mariadb-5.5.68-1.amzn2.x86_64                              1/1
+    amazon-ebs.golden-ami:   Verifying  : 1:mariadb-5.5.68-1.amzn2.x86_64                              1/1
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Installed:
+    amazon-ebs.golden-ami:   mariadb.x86_64 1:5.5.68-1.amzn2
+    amazon-ebs.golden-ami:
+    amazon-ebs.golden-ami: Complete!
+    amazon-ebs.golden-ami: download: s3://webapp-distribution/Inventory.war to ../../usr/share/tomcat/webapps/Inventory.war
+==> amazon-ebs.golden-ami: Created symlink from /etc/systemd/system/multi-user.target.wants/tomcat.service to /usr/lib/systemd/system/tomcat.service.
+==> amazon-ebs.golden-ami: Uploading ../scripts/amazon-cloudwatch-agent.json => /tmp/amazon-cloudwatch-agent.json
+==> amazon-ebs.golden-ami: Provisioning with shell script: ../scripts/setup_cloudwatch.sh
+    amazon-ebs.golden-ami: ****** processing amazon-cloudwatch-agent ******
+    amazon-ebs.golden-ami: /opt/aws/amazon-cloudwatch-agent/bin/config-downloader --output-dir /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.d --download-source file:/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent.json --mode ec2 --config /opt/aws/amazon-cloudwatch-agent/etc/common-config.toml --multi-config default
+    amazon-ebs.golden-ami: Successfully fetched the config and saved in /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.d/file_amazon-cloudwatch-agent.json.tmp
+==> amazon-ebs.golden-ami: 2021/05/09 15:27:21 Reading json config file path: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.d/file_amazon-cloudwatch-agent.json.tmp ...
+    amazon-ebs.golden-ami: Start configuration validation...
+==> amazon-ebs.golden-ami: Created symlink from /etc/systemd/system/multi-user.target.wants/amazon-cloudwatch-agent.service to /etc/systemd/system/amazon-cloudwatch-agent.service.
+    amazon-ebs.golden-ami: /opt/aws/amazon-cloudwatch-agent/bin/config-translator --input /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json --input-dir /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.d --output /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.toml --mode ec2 --config /opt/aws/amazon-cloudwatch-agent/etc/common-config.toml --multi-config default
+    amazon-ebs.golden-ami: Valid Json input schema.
+    amazon-ebs.golden-ami: I! Detecting run_as_user...
+    amazon-ebs.golden-ami: No csm configuration found.
+    amazon-ebs.golden-ami: Configuration validation first phase succeeded
+    amazon-ebs.golden-ami: /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent -schematest -config /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.toml
+    amazon-ebs.golden-ami: Configuration validation second phase succeeded
+    amazon-ebs.golden-ami: Configuration validation succeeded
+    amazon-ebs.golden-ami: amazon-cloudwatch-agent has already been stopped
+==> amazon-ebs.golden-ami: Redirecting to /bin/systemctl restart amazon-cloudwatch-agent.service
+==> amazon-ebs.golden-ami: Stopping the source instance...
+    amazon-ebs.golden-ami: Stopping instance
+==> amazon-ebs.golden-ami: Waiting for the instance to stop...
+==> amazon-ebs.golden-ami: Creating AMI golden-ami-20210509152433 from instance i-0ee067701c5d222cc
+    amazon-ebs.golden-ami: AMI: ami-043261a3d9b13da22
+==> amazon-ebs.golden-ami: Waiting for AMI to become ready...
+==> amazon-ebs.golden-ami: Terminating the source AWS instance...
+==> amazon-ebs.golden-ami: Cleaning up any extra volumes...
+==> amazon-ebs.golden-ami: No volumes to clean up, skipping
+==> amazon-ebs.golden-ami: Deleting temporary security group...
+==> amazon-ebs.golden-ami: Deleting temporary keypair...
+Build 'amazon-ebs.golden-ami' finished after 4 minutes 56 seconds.
+
+==> Wait completed after 4 minutes 56 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> amazon-ebs.golden-ami: AMIs were created:
+us-east-1: ami-043261a3d9b13da22

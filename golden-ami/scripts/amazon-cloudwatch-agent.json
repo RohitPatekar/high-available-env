@@ -1,0 +1,102 @@
+{
+   "metrics":{
+      "append_dimensions":{
+         "ImageId":"${aws:ImageId}",
+         "InstanceId":"${aws:InstanceId}",
+         "InstanceType":"${aws:InstanceType}"
+      },
+      "aggregation_dimensions": [["InstanceId"],["InstanceId","path"],["InstanceId","instance"]],
+      "metrics_collected":{
+         "cpu":{
+            "measurement":[
+               "cpu_usage_idle",
+               "cpu_usage_iowait",
+               "cpu_usage_user",
+               "cpu_usage_system"
+            ],
+            "metrics_collection_interval":60,
+            "resources":[
+               "*"
+            ],
+            "totalcpu":false
+         },
+         "disk":{
+            "measurement":[
+               "used_percent",
+               "inodes_free"
+            ],
+            "ignore_file_system_types":[
+               "devtmpfs",
+               "squashfs",
+               "tmpfs",
+               "nfs4",
+               "overlay",
+               "shm"
+            ],
+            "metrics_collection_interval":60,
+            "resources":[
+               "*"
+            ]
+         },
+         "diskio":{
+            "measurement":[
+               "io_time",
+               "write_bytes",
+               "read_bytes",
+               "writes",
+               "reads"
+            ],
+            "metrics_collection_interval":60,
+            "resources":[
+               "*"
+            ]
+         },
+         "mem":{
+            "measurement":[
+               "mem_used_percent"
+            ],
+            "metrics_collection_interval":60
+         },
+         "netstat":{
+            "measurement":[
+               "tcp_established",
+               "tcp_time_wait",
+               "tcp_close_wait"
+            ],
+            "metrics_collection_interval":60
+         },
+         "processes":{
+           "measurement":[
+             "processes_running",
+             "processes_zombies"
+           ],
+           "metrics_collection_interval":60
+         },
+         "statsd":{
+            "metrics_aggregation_interval":60,
+            "metrics_collection_interval":10,
+            "service_address":":8125"
+         },
+         "swap":{
+            "measurement":[
+               "swap_used_percent"
+            ],
+            "metrics_collection_interval":60
+         }
+      }
+   },
+   "logs": {
+      "logs_collected": {
+         "files": {
+            "collect_list": [
+               {
+                  "file_path": "/var/log/tomcat/catalina*.log",
+                  "log_group_name": "/var/log/tomcat/",
+                  "log_stream_name": "{instance_id}/catalina",
+                  "timestamp_format": "%Y-%m-%d %H:%M:%S,%f"
+               }
+            ]
+         }
+      }
+   }
+}
